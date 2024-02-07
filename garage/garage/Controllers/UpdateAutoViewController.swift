@@ -10,7 +10,7 @@ import FirebaseAuth
 import SwiftUI
 
 class UpdateAutoViewController: UIViewController {
-    
+    //MARK: - Properties
     private lazy var titleView = makeTitle()
     private lazy var table = makeTable()
     private lazy var closeButton = makeCloseButton()
@@ -21,6 +21,7 @@ class UpdateAutoViewController: UIViewController {
     
     private let group = DispatchGroup()
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         applyTheme()
@@ -28,7 +29,6 @@ class UpdateAutoViewController: UIViewController {
         pinCloseButton()
         pinUpdateButton()
         pinTable()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,8 +52,9 @@ class UpdateAutoViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension UpdateAutoViewController {
-    
+
     func makeTable() -> UITableView {
         let table = UITableView(frame: .zero, style: .insetGrouped)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +99,7 @@ extension UpdateAutoViewController {
         button.setImage(.init(systemName: "xmark.circle"), for: .normal)
         button.addTarget(self, action: #selector(close), for: .touchUpInside)
         button.tintColor = Theme.currentTheme.textColorSecondary
+       
         return button
     }
     
@@ -138,7 +140,7 @@ extension UpdateAutoViewController {
             updateButton.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
-    
+    //метод  для изменение данных в пробеге в авто в БД
     @objc
     func update() {
         self.autos.forEach({
@@ -158,7 +160,7 @@ extension UpdateAutoViewController {
         }
     }
 }
-
+    //MARK: - UITableViewDelegate, UITableViewDataSource
 extension UpdateAutoViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
