@@ -9,8 +9,6 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-
-
 class NewHomePage: UIViewController {
     
     enum Sections: Int, CaseIterable {
@@ -37,6 +35,8 @@ class NewHomePage: UIViewController {
     private lazy var collectionView = makeCollectionView()
     private var selectedIndex: IndexPath = IndexPath(item: 0, section: 0)
     
+    private var isShowUpdateVC: Bool = false
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,25 +45,39 @@ class NewHomePage: UIViewController {
         
         title = "GARAGE"
         
+        loadData() { [weak self] in
+            guard let self = self else { return }
+            if !self.isShowUpdateVC, !self.autos.isEmpty {
+                self.isShowUpdateVC = true
+                showUpdateView()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        loadData() {}
+    }
+    
+    private func loadData(_ callback: @escaping () -> Void) {
         service.fetchAutos() { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let autos):
+                self.autos = []
                 autos.forEach({ auto in
                     var newAuto = auto
                     let service = auto.services.filter({ !$0.isCompleted })
                     newAuto.services = service
-                    self?.autos.append(newAuto)
+                    self.autos.append(newAuto)
                 })
-                self?.collectionView.reloadData()
-                self?.collectionView.selectItem(at: self?.selectedIndex, animated: false, scrollPosition: .centeredHorizontally)
+                self.collectionView.reloadData()
+                self.collectionView.selectItem(at: self.selectedIndex, animated: false, scrollPosition: .centeredHorizontally)
+                
+                callback()
+                
             case .failure(let failure):
                 print(failure)
-                
             }
         }
     }
@@ -134,19 +148,27 @@ extension NewHomePage: UICollectionViewDataSource, UICollectionViewDelegate {
                 
                 
                 if let km = to.mileage  {
-                    var progressViewValue = Float(autos[selectedIndex.row].mileage - to.mileageCreatedService) / Float(km - to.mileageCreatedService)
+                    let progressViewValue = Float(autos[selectedIndex.row].mileage - to.mileageCreatedService) / Float(km - to.mileageCreatedService)
                     cell.progressView.progress = Float(progressViewValue)
-                } else {
-                    cell.progressView.progress = 0
+                    cell.deadline.text = "Через \(km - autos[selectedIndex.row].mileage) км(миль)"
                 }
+                
+                if let dedline = to.dedline {
                     
-                
-            
-                
-                
-//дописать локигику по  пробегу или дате
-                cell.deadline.text = "Через 45 дней"
+                    let dedlimeValue = dedline.millisecondsSince1970
+                    let todayValue = Date().millisecondsSince1970
+                    let toValueCreated = to.dateCreatedService.millisecondsSince1970
                     
+                    let progressViewValue = Float(todayValue - toValueCreated) / Float(dedlimeValue - toValueCreated)
+                    cell.progressView.progress = Float(progressViewValue)
+                    
+                    
+                    let delta = dedline.timeIntervalSince(Date())
+                    
+                    if let day = Calendar.current.dateComponents([.day], from: Date(), to: dedline).day {
+                        cell.deadline.text = "Осталось \(day) дней"
+                    }
+                }
                 return cell
             }
         }
@@ -180,6 +202,13 @@ extension NewHomePage: UICollectionViewDataSource, UICollectionViewDelegate {
 }
 
 extension NewHomePage {
+    func showUpdateView() {
+        let vc = UpdateMileageVC()
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.navigationController?.present(vc, animated: true)
+    }
+    
     //MARK: - setup collection layout
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
@@ -334,3 +363,10 @@ extension NewHomePage: CellAutoDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+extension Date {
+    var millisecondsSince1970: Int64 {
+        Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    }
+}
+

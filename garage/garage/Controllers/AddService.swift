@@ -28,11 +28,28 @@ class AddService: UIViewController {
     
     let datePicker = UIDatePicker()
     
+    @IBOutlet weak var segmentStack: UIStackView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    
     private var currentService: ServiceModel? {
         didSet {
             descriptionTF.text = currentService?.taskDescription
-            serviceDedlineTF.text = currentService?.dedline?.toString()
-            serviceMileageTF.text = String(currentService?.mileage ?? 0)
+            
+            segmentStack.isHidden = true
+            
+            if let dedline = currentService?.dedline?.toString() {
+                serviceDedlineTF.text = dedline
+                self.mileStack.isHidden = true
+                self.dateStack.isHidden = false
+            }
+            
+            if let milage = currentService?.mileage {
+                self.dateStack.isHidden = true
+                self.mileStack.isHidden = false
+                serviceMileageTF.text = String(milage)
+            }
+            
             switcher.isOn = currentService?.isCompleted ?? false
         }
     }
@@ -53,6 +70,8 @@ class AddService: UIViewController {
     
     @IBOutlet weak var deleteBtn: UIButton!
     
+    @IBOutlet weak var dateStack: UIStackView!
+    @IBOutlet weak var mileStack: UIStackView!
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -62,6 +81,7 @@ class AddService: UIViewController {
     
         applyTheme()
         title = "Добавить напоминание"
+                
     }
     
     // MARK: - Actions
@@ -75,11 +95,19 @@ class AddService: UIViewController {
             currentService.dedline = serviceDedlineTF.text?.toDate()
             currentService.mileage = Int(serviceMileageTF.text ?? "")
             
+            if currentService.isCompleted {
+                currentService.dedline = Date()
+            }
+            
             updateService(model: currentService)
             
         } else {
             
-            let model = ServiceModel(taskDescription: description, mileage: Int(serviceMileageTF.text ?? ""), dedline: serviceDedlineTF.text?.toDate(), isCompleted: false, dateCreatedService: Date(), mileageCreatedService: currentAuto.mileage)
+            let dedline = segmentControl.selectedSegmentIndex == 0 ?  serviceDedlineTF.text?.toDate() : nil
+            
+            let mileage = segmentControl.selectedSegmentIndex == 1 ? Int(serviceMileageTF.text ?? "") :  nil
+            
+            let model = ServiceModel(taskDescription: description, mileage: mileage, dedline: dedline , isCompleted: false, dateCreatedService: Date(), mileageCreatedService: currentAuto.mileage)
             addService(model: model)
         }
     }
@@ -106,6 +134,12 @@ class AddService: UIViewController {
     @IBAction func switcherAction(_ sender: Any) {
         currentService?.isCompleted.toggle()
     }
+    
+    @IBAction func segmentAction(_ sender: Any) {
+        dateStack.isHidden.toggle()
+        mileStack.isHidden.toggle()
+    }
+    
     
     // MARK: - Private functions
     

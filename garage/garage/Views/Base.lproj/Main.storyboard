@@ -666,7 +666,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="4Ka-9e-MSr">
-                                <rect key="frame" x="25" y="73" width="364" height="354.5"/>
+                                <rect key="frame" x="25" y="73" width="364" height="329.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tNF-ss-UAe">
                                         <rect key="frame" x="0.0" y="0.0" width="364" height="84.5"/>
@@ -687,8 +687,33 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rcu-oV-ojt">
+                                        <rect key="frame" x="0.0" y="99.5" width="364" height="59.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите тип оповещения" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jI0-ji-juw">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eWe-QU-NXL">
+                                                <rect key="frame" x="0.0" y="28.5" width="364" height="32"/>
+                                                <segments>
+                                                    <segment title="по дате"/>
+                                                    <segment title="по пробегу"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="segmentAction:" destination="9ZP-yN-RtN" eventType="valueChanged" id="X8h-Fi-wWb"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="jI0-ji-juw" firstAttribute="width" secondItem="rcu-oV-ojt" secondAttribute="width" id="32C-fx-kIi"/>
+                                            <constraint firstItem="eWe-QU-NXL" firstAttribute="width" secondItem="rcu-oV-ojt" secondAttribute="width" id="8LQ-RP-7RL"/>
+                                        </constraints>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KZF-er-iwb">
-                                        <rect key="frame" x="0.0" y="99.5" width="364" height="84.5"/>
+                                        <rect key="frame" x="0.0" y="174" width="364" height="84.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата выполнения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqE-dn-9rE">
                                                 <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
@@ -706,17 +731,17 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uXB-dK-IHW">
-                                        <rect key="frame" x="0.0" y="199" width="364" height="84.5"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uXB-dK-IHW">
+                                        <rect key="frame" x="0.0" y="266" width="364" height="64"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обслуживание на пробеге, км(мили)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffe-VW-8PR">
-                                                <rect key="frame" x="0.0" y="0.0" width="271" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="271" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cbm-0E-Dtw">
-                                                <rect key="frame" x="0.0" y="28.5" width="364" height="56"/>
+                                                <rect key="frame" x="0.0" y="8" width="364" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="56" id="l2O-Qs-Kn4"/>
                                                 </constraints>
@@ -726,7 +751,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfN-4L-DVn">
-                                        <rect key="frame" x="0.0" y="291" width="364" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="266" width="364" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выполнено" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cpd-Nw-I2t">
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="0.0"/>
@@ -743,7 +768,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wSO-TA-zeV">
-                                        <rect key="frame" x="0.0" y="298.5" width="364" height="56"/>
+                                        <rect key="frame" x="0.0" y="273.5" width="364" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="Ko5-EE-SyE"/>
                                         </constraints>
@@ -754,7 +779,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMv-LW-50d">
-                                        <rect key="frame" x="0.0" y="354.5" width="364" height="56"/>
+                                        <rect key="frame" x="0.0" y="329.5" width="364" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="gyl-0m-1CQ"/>
                                         </constraints>
@@ -767,6 +792,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="rcu-oV-ojt" firstAttribute="width" secondItem="4Ka-9e-MSr" secondAttribute="width" id="4SG-m3-U0H"/>
                                     <constraint firstItem="cbm-0E-Dtw" firstAttribute="width" secondItem="4Ka-9e-MSr" secondAttribute="width" id="C1A-8X-JhB"/>
                                     <constraint firstItem="TvV-W9-1FQ" firstAttribute="width" secondItem="4Ka-9e-MSr" secondAttribute="width" id="PbB-xR-O7Q"/>
                                     <constraint firstItem="wSO-TA-zeV" firstAttribute="width" secondItem="4Ka-9e-MSr" secondAttribute="width" id="YV2-2x-l4X"/>
@@ -785,13 +811,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dateStack" destination="KZF-er-iwb" id="nMa-ra-B0f"/>
                         <outlet property="deleteBtn" destination="ZMv-LW-50d" id="G1T-uA-HHl"/>
                         <outlet property="descriptionTF" destination="THt-9Y-iuI" id="LaW-7a-Ide"/>
+                        <outlet property="mileStack" destination="uXB-dK-IHW" id="lfl-T4-5EG"/>
                         <outlet property="save" destination="wSO-TA-zeV" id="DSO-wR-eTf"/>
+                        <outlet property="segmentControl" destination="eWe-QU-NXL" id="n5M-pm-Z6a"/>
+                        <outlet property="segmentStack" destination="rcu-oV-ojt" id="tbD-RC-ZN5"/>
                         <outlet property="serviceDedlineLbl" destination="jqE-dn-9rE" id="JjT-rZ-Ytr"/>
                         <outlet property="serviceDedlineTF" destination="TvV-W9-1FQ" id="6ce-wf-drH"/>
                         <outlet property="serviceMileageTF" destination="cbm-0E-Dtw" id="mGH-sh-SD1"/>
-                        <outlet property="serviseMileageLbl" destination="Ffe-VW-8PR" id="Tbe-T7-XxX"/>
+                        <outlet property="serviseMileageLbl" destination="Ffe-VW-8PR" id="kYE-MS-eJb"/>
                         <outlet property="switcher" destination="xTn-t6-vC6" id="sXH-cq-kMh"/>
                         <outlet property="switcherStack" destination="bfN-4L-DVn" id="nKe-c2-JVg"/>
                         <outlet property="workDescriptionLbl" destination="ZCd-22-Oy7" id="5BV-D7-mX0"/>

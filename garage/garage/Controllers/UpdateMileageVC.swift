@@ -9,7 +9,7 @@ import Firebase
 import FirebaseAuth
 import SwiftUI
 
-class UpdateAutoViewController: UIViewController {
+class UpdateMileageVC: UIViewController {
     //MARK: - Properties
     private lazy var titleView = makeTitle()
     private lazy var table = makeTable()
@@ -53,7 +53,7 @@ class UpdateAutoViewController: UIViewController {
 }
 
 // MARK: - Extensions
-extension UpdateAutoViewController {
+extension UpdateMileageVC {
 
     func makeTable() -> UITableView {
         let table = UITableView(frame: .zero, style: .insetGrouped)
@@ -161,7 +161,7 @@ extension UpdateAutoViewController {
     }
 }
     //MARK: - UITableViewDelegate, UITableViewDataSource
-extension UpdateAutoViewController: UITableViewDelegate, UITableViewDataSource {
+extension UpdateMileageVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return autos.count
@@ -191,7 +191,7 @@ extension UpdateAutoViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension UpdateAutoViewController: UpadateViewDelegate {
+extension UpdateMileageVC: UpadateViewDelegate {
     
     func updateValue(_ value: Int, at index: Int) {
         self.autos[index].mileage = value
