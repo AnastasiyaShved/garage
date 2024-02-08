@@ -49,7 +49,6 @@ Instruments
 - Firebase: Authentication, Realtime Database
 - UIKit
 - SwiftUI
-- Localize_swift
 
 
 
