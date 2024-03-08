@@ -65,7 +65,6 @@ class RegistrationVC: UIViewController {
                     print("weak password")
                     self?.errorNotification(object: self?.passwordTF)
                 case .missingEmail:
-                    print("missing email")
                     self?.errorNotification(object: self?.emailTF)
                 default:
                     print(error.description)
