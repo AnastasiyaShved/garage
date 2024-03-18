@@ -34,7 +34,6 @@ extension SignInPresenter: SignInPresenterProtocol {
         authService.signIn(with: email, password: password) { [weak self] result in
             switch result {
             case .success(let user):
-                print(user.email)
                 self?.controller?.goToHomePage()
             case .failure(let error):
                 guard let error = error as? NSError else {

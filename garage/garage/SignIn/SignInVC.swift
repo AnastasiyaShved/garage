@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import SwiftUI
 
 enum TextFieldState {
     case normal
@@ -23,25 +24,24 @@ protocol SignInVCProtocol: AnyObject {
 
 class SignInVC: UIViewController {
     
+    @AppStorage(wrappedValue: 1, "currentPage") var currentPage
+    
     // MARK: - Properties
     /// для связи с SignInPresenter создаем переменную
     var presenter: SignInPresenterProtocol!
     
-//    var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle!
-    
+    //создаем переменную для абзервера
+    var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle!
+
     private let eyeButton = EyeButton()
-    
     private var isPrivate = true
     
     @IBOutlet weak var emailLbl: UILabel!
     @IBOutlet weak var passwordLbl: UILabel!
     @IBOutlet weak var noAccountLbL: UILabel!
-    
     @IBOutlet weak var forgetPassword: UIButton!
-    
     @IBOutlet weak var register: UIButton!
     @IBOutlet weak var button: UIButton!
-    
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet  var passwordTF: UITextField!
     
@@ -63,12 +63,16 @@ class SignInVC: UIViewController {
         setupPasswordTF()
         addActions()
         
+        stateDidChangeListenerHandle()
+        
+        startOnbording()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailTF.text = nil
-        passwordTF.text = nil
+        emailTF.text = "pav159208@gmail.com" // will change nil
+        passwordTF.text = "1722104Pion" 
         emailTF.backgroundColor = nil
         passwordTF.backgroundColor = nil
     }
@@ -76,7 +80,6 @@ class SignInVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-        
     }
     
     // MARK: - Actions
@@ -101,7 +104,13 @@ class SignInVC: UIViewController {
         button.tintColor = Theme.currentTheme.buttonColor
     }
     
-//   
+    //    функция для отслежтиывания схода в учетку
+    private func stateDidChangeListenerHandle() {
+        authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener({ [ weak self ] _, user in
+            guard let user = user else { return }
+            //self?.goToHome() 
+        })
+    }
     
     private func errorNotification(object: UITextField!) {
         guard let object = object else { return }
@@ -175,12 +184,29 @@ private extension SignInVC {
         guard let object = object else { return }
          object.backgroundColor = .white
     }
+    
+    func goToHome() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(identifier:  "NewHomePage") as? TabBarControllerForHamePage {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func startOnbording() {
+        if currentPage <= 3 {
+            currentPage = 1
+            let vc = OnbordingHost()
+            vc.modalPresentationStyle = .fullScreen
+            
+            self.navigationController?.present(vc, animated: false)
+        }
+    }
 }
 
 extension SignInVC: SignInVCProtocol {
     
     func goToHomePage() {
-        performSegue(withIdentifier: "goToHomePage", sender: nil)
+        goToHome()
     }
     
     func updateUI(type: TextFieldState) {

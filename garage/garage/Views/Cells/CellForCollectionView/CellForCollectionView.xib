@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellForCollectionView" id="gTV-IL-0wX" customClass="CellForCollectionView" customModule="garage" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="top" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ekV-7a-qra">
+                        <rect key="frame" x="8" y="8" width="184" height="84"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl8-xi-nr2">
+                                <rect key="frame" x="0.0" y="0.0" width="184" height="52.666666666666664"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52.666666666666664" id="fia-XH-ps5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" name="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWb-pa-HSg">
+                                <rect key="frame" x="0.0" y="56.666666666666679" width="184" height="19.333333333333336"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" name="textColorSecondary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Esb-Zb-kRf">
+                                <rect key="frame" x="0.0" y="80" width="184" height="4"/>
+                                <color key="tintColor" name="buttonColor"/>
+                            </progressView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Esb-Zb-kRf" firstAttribute="width" secondItem="ekV-7a-qra" secondAttribute="width" id="6wZ-gE-SfU"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ekV-7a-qra" secondAttribute="bottom" constant="8" id="2My-69-Gb0"/>
+                <constraint firstAttribute="trailing" secondItem="ekV-7a-qra" secondAttribute="trailing" constant="8" id="LYu-KZ-59v"/>
+                <constraint firstItem="ekV-7a-qra" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="PXi-f6-uxC"/>
+                <constraint firstItem="ekV-7a-qra" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="qhL-nz-f0I"/>
+            </constraints>
+            <size key="customSize" width="126" height="82"/>
+            <connections>
+                <outlet property="deadline" destination="MWb-pa-HSg" id="9A5-1R-InL"/>
+                <outlet property="progressView" destination="Esb-Zb-kRf" id="yco-Ag-Nb4"/>
+                <outlet property="tasksName" destination="fl8-xi-nr2" id="vzJ-Ot-oRZ"/>
+            </connections>
+            <point key="canvasLocation" x="141.98473282442748" y="45.070422535211272"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="buttonColor">
+            <color red="0.75686274509803919" green="0.23137254901960785" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textColor">
+            <color red="0.14117647058823529" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textColorSecondary">
+            <color red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
